@@ -27,8 +27,8 @@ QUESTION_SETS = _load_questions()
 
 def get_sample_question_sets() -> Dict[str, Any]:
     """Returns the available reference question sets:
-    - Set 1 by Tobi Kaymak (30 Core Questions)
-    - Set 2 by Sahil Suri (30 Scenario Questions)
+    - Set 1 by Sahil Suri (30 Core Questions)
+    - Set 2 by Tobi Kaymak (30 Scenario Questions)
     """
     summary = {}
     for key, data in QUESTION_SETS.items():
@@ -182,7 +182,7 @@ root_agent = Agent(
 Your mission is to administer certification quizzes, synthesize custom AI questions using Gemini, evaluate user responses, and explain complex multi-agent, ADK, MCP, and grounding architecture concepts.
 
 You have access to the following tools:
-1. `get_sample_question_sets`: Lists pre-provided sample question banks (Set 1 by Tobi Kaymak & Set 2 by Sahil Suri).
+1. `get_sample_question_sets`: Lists pre-provided sample question banks (Set 1 by Sahil Suri & Set 2 by Tobi Kaymak).
 2. `generate_quiz_questions`: Generates new, tailored assessment questions using Gemini with reference context.
 3. `evaluate_quiz_answers`: Scores candidate submissions and calculates percentage accuracy and feedback.
 ''',

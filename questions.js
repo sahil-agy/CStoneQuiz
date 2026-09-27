@@ -1,6 +1,6 @@
 const QUIZ_QUESTION_SETS = {
   "set1": {
-    "title": "Set 1 by Tobi Kaymak",
+    "title": "Set 1 by Sahil Suri",
     "description": "30 Core questions on Gemini Enterprise, Root Agents, MCP, ADK, and Grounding.",
     "questions": [
       {
@@ -366,7 +366,7 @@ const QUIZ_QUESTION_SETS = {
     ]
   },
   "set2": {
-    "title": "Set 2 by Sahil Suri",
+    "title": "Set 2 by Tobi Kaymak",
     "description": "30 Advanced scenario-based questions on AI Design Patterns, ADK, RAG, and Security.",
     "questions": [
       {
