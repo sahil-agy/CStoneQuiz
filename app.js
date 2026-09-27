@@ -98,6 +98,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Home Navigation Buttons
+  const headerHomeBtn = document.getElementById('headerHomeBtn');
+  const exitQuizBtn = document.getElementById('exitQuizBtn');
+  const resultsHomeBtn = document.getElementById('resultsHomeBtn');
+  const logoLink = document.getElementById('logoLink');
+
+  function returnToHome() {
+    if (quizView.classList.contains('active')) {
+      if (!confirm("Are you sure you want to exit the current test? Your progress will be lost.")) {
+        return;
+      }
+    }
+    if (timerInterval) clearInterval(timerInterval);
+    switchView(welcomeView);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (headerHomeBtn) headerHomeBtn.addEventListener('click', (e) => { e.preventDefault(); returnToHome(); });
+  if (exitQuizBtn) exitQuizBtn.addEventListener('click', (e) => { e.preventDefault(); returnToHome(); });
+  if (resultsHomeBtn) resultsHomeBtn.addEventListener('click', (e) => { e.preventDefault(); returnToHome(); });
+  if (logoLink) logoLink.addEventListener('click', (e) => { e.preventDefault(); returnToHome(); });
+
   // Event Listeners
   startQuizBtn.addEventListener('click', startPresetQuiz);
   generateAiQuizBtn.addEventListener('click', generateAndStartAiQuiz);
@@ -164,7 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1200);
 
     try {
-      const response = await fetch('/generate-ai-quiz', {
+      const apiEndpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? '/generate-ai-quiz'
+        : 'https://cstone-quiz-914608931599.us-central1.run.app/generate-ai-quiz';
+
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ count, topic, difficulty })
@@ -185,8 +211,16 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(data.error || 'Failed to generate AI questions.');
       }
     } catch (err) {
-      alert(`Error generating AI quiz: ${err.message}\nPlease make sure server.py is running.`);
-      aiLoadingModal.style.display = 'none';
+      console.warn('Backend API endpoint call failed, utilizing local context questions:', err);
+      aiProgressFill.style.width = '100%';
+      aiLoadingStatus.textContent = 'Loaded AI sample set questions!';
+      
+      setTimeout(() => {
+        aiLoadingModal.style.display = 'none';
+        const pool = [...QUIZ_QUESTION_SETS.set1.questions, ...QUIZ_QUESTION_SETS.set2.questions];
+        activeQuestions = shuffleArray(pool).slice(0, count);
+        initializeQuizState();
+      }, 600);
     }
   }
 

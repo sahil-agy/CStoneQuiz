@@ -16,7 +16,12 @@
         <div class="logo-icon">Q</div>
         <div class="logo-text">AIAssess Quiz</div>
       </a>
-      <div class="badge-tag">Elevate & HackerRank Certified • Gemini Powered</div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="headerHomeBtn" class="btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: var(--radius-pill); font-weight: 600;">
+          🏠 Back to Menu
+        </button>
+        <div class="badge-tag">Elevate & HackerRank Certified • Gemini Powered</div>
+      </div>
     </header>
 
     <!-- Welcome View -->
@@ -198,6 +203,9 @@
       <div class="glass-card">
         <!-- Header Bar -->
         <div class="quiz-header-bar">
+          <button id="exitQuizBtn" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.85rem; font-weight: 600;">
+            ← Exit to Home
+          </button>
           <div class="progress-info">
             <div id="questionCounter" class="question-counter">Question <span>1</span> of 30</div>
             <div id="timerPill" class="timer-pill" style="display:none;">
@@ -297,10 +305,13 @@
         </div>
 
         <!-- Action Bar -->
-        <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="text-align: center; margin-bottom: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
           <button id="retakeBtn" class="btn-primary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
             Retake Quiz
+          </button>
+          <button id="resultsHomeBtn" class="btn-secondary" style="border: 1.5px solid var(--google-blue); color: var(--google-blue); font-weight: 700;">
+            🏠 Back to Main Menu
           </button>
         </div>
 
