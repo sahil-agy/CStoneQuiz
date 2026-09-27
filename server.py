@@ -11,7 +11,7 @@ if base_dir not in sys.path:
 
 import agent
 
-PORT = 8080
+PORT = int(os.environ.get('PORT', 8080))
 
 class QuizRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
@@ -51,6 +51,6 @@ class QuizRequestHandler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
 if __name__ == '__main__':
-    print(f"Starting ADK Agent Runtime & Web UI server on http://localhost:{PORT}...")
-    with socketserver.TCPServer(("", PORT), QuizRequestHandler) as httpd:
+    print(f"Starting ADK Agent Runtime & Web UI server on 0.0.0.0:{PORT}...")
+    with socketserver.TCPServer(("0.0.0.0", PORT), QuizRequestHandler) as httpd:
         httpd.serve_forever()
